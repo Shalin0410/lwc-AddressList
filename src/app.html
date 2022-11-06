@@ -1,0 +1,85 @@
+<template>
+	<lightning-card title="Address List">
+		<lightning-button-menu icon-name="utility:connected_apps" variant="border-filled" class="slds-item_detail"
+			slot="actions">
+			<lightning-menu-item value="newCustomerNewGroup" label="New Customer New Group" onclick={showNCNGModal}>
+			</lightning-menu-item>
+			<lightning-menu-item value="newCustomerExistingGroup" label="New Customer Existing Group" onclick={showNCEGModal}>
+			</lightning-menu-item>
+		</lightning-button-menu>
+
+		<!-- modal start -->
+		<template if:true={isShowNCNGModal}>
+			<section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+				class="slds-modal slds-fade-in-open">
+				<div class="slds-modal__container">
+					<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+					onclick={hideNCNGModal}>
+						<lightning-icon 
+							icon-name="utility:close"
+              alternative-text="close"
+              variant="inverse"
+              size="small" >
+						</lightning-icon>
+						<span class="slds-assistive-text">Close</span>
+					</button>
+					<div class="slds-modal__header">
+						<h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">New Customer New Group</h1>
+					</div>
+					<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+						<lightning-radio-group name="address" options={options} value={value} required type="radio"
+							onchange={handleChangeAddress} variant="label-inline">
+						</lightning-radio-group>
+
+
+					</div>
+					<div class="slds-modal__footer">
+						<button class="slds-button slds-button_neutral" onclick={hideNCNGModal}>Cancel</button>
+						<button class="slds-button slds-button_brand" onclick={hideNCNGModal}>Continue</button>
+					</div>
+				</div>
+			</section>
+			<div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+		</template>
+		<!-- modal end -->
+
+		<!-- modal start -->
+		<template if:true={isShowNCEGModal}>
+			<section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-02"
+				class="slds-modal slds-fade-in-open">
+				<div class="slds-modal__container">
+					<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close"
+					onclick={hideNCEGModal}>
+						<lightning-icon 
+							icon-name="utility:close"
+              alternative-text="close"
+              variant="inverse"
+              size="small" >
+						</lightning-icon>
+						<span class="slds-assistive-text">Close</span>
+					</button>
+					<div class="slds-modal__header">
+						<h1 id="modal-heading-02" class="slds-modal__title slds-hyphenate">New Customer Existing Group</h1>
+					</div>
+					<div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+						<lightning-radio-group name="address" options={options} value={value} required type="radio"
+							onchange={handleChangeAddress} variant="label-inline">
+						</lightning-radio-group>
+					</div>
+					<div class="slds-modal__footer">
+						<button class="slds-button slds-button_neutral" onclick={hideNCEGModal}>Cancel</button>
+						<button class="slds-button slds-button_brand" onclick={hideNCEGModal}>Continue</button>
+					</div>
+				</div>
+			</section>
+			<div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+		</template>
+		<!-- modal end -->
+
+		<div style="height: 250px;">
+			<lightning-datatable key-field="id" data={data} show-row-number-column row-number-offset={rowOffset}
+				columns={columns}>
+			</lightning-datatable>
+		</div>
+	</lightning-card>
+</template>
